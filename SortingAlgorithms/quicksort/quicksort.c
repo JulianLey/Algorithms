@@ -13,19 +13,19 @@ void quicksortLomuto(int* array, int low, int high)
     quicksortLomuto(array, p + 1, high);
 }
 
-
-
-int main()
+void quicksortHoare(int* array, int low, int high)
 {
-    //Example
+    if (low < high)
+    {
+        int p = hoarePartition(array, low, high);
 
-    int array[] = {2, 1, 8, 3, 7, 1, 2, 1, 3, 4, 2, 5, 4, 6, 0, 9, 8, 7, -1, -5};
-    int target = 4;
-    int arrayLength = sizeof(array) / sizeof(array[0]);
+        quicksortHoare(array, low, p);
+        quicksortHoare(array, p + 1, high);
+    }
+}
 
-    quicksortLomuto(array, 0, arrayLength - 1);
-    
-
+void printArray(int* array, int arrayLength)
+{
     printf("{");
     for (int i = 0; i < arrayLength; i++)
     {
@@ -36,6 +36,23 @@ int main()
         }
     }
     printf("}\n");
+}
+
+int main()
+{
+    //Example
+
+    int array1[] = {2, 1, 8, 3, 7, 1, 2, 1, 3, 4, 2, 5, 4, 6, 0, 9, 8, 7, -1, -5};
+    int array2[] = {2, 1, 8, 3, 7, 1, 2, 1, 3, 4, 2, 5, 4, 6, 0, 9, 8, 7, -1, -5};
+
+    int arrayLength1 = sizeof(array1) / sizeof(array1[0]);
+    int arrayLength2 = sizeof(array2) / sizeof(array2[0]);
+
+    quicksortLomuto(array1, 0, arrayLength1 - 1);
+    quicksortHoare(array2, 0, arrayLength2 - 1);
+
+    printArray(array1, arrayLength1);
+    printArray(array2, arrayLength2);
 
 
     return 0;
